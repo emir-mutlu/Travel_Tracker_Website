@@ -1,0 +1,415 @@
+/* === GLOBAL RESET & TYPOGRAPHY === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* === BACKGROUND: DARK + COLORFUL GLOW === */
+@keyframes tracker-bg-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(3%, -2%, 0);
+  }
+  100% {
+    transform: translate3d(-3%, 2%, 0);
+  }
+}
+
+.tracker-body {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1.5rem 4rem;
+
+  /* koyu ama düz siyah değil, hafif mavi tonlu */
+  background: radial-gradient(circle at 0% 0%, #020617 0, #020617 45%, #020617 100%);
+  color: #f9fafb;
+  overflow-x: hidden;
+}
+
+/* arkadaki renk hüzmesi */
+.tracker-body::before {
+  content: "";
+  position: fixed;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(56, 189, 248, 0.6), transparent 60%),
+    radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.6), transparent 60%),
+    radial-gradient(circle at 60% 15%, rgba(251, 191, 36, 0.35), transparent 70%);
+  filter: blur(90px);
+  opacity: 0.75;
+  animation: tracker-bg-shift 26s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+/* === PAGE CONTAINER === */
+.tracker-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* === HEADER === */
+.tracker-header {
+  padding: 1.8rem 2rem;
+  border-radius: 1.5rem;
+  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tracker-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(251, 191, 36, 0.9);
+  color: #fbbf24;
+}
+
+.tracker-title {
+  margin: 0;
+  font-size: clamp(2.1rem, 3vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(120deg, #38bdf8, #22c55e, #eab308);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.tracker-subtitle {
+  margin: 0;
+  max-width: 560px;
+  font-size: 0.96rem;
+  color: #e5e7eb;
+  opacity: 0.9;
+}
+
+/* === CONTROLS (TABS + FORM) === */
+.tracker-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* USER TABS – büyük koyu kapsül */
+.user-tabs {
+  flex: 1 1 340px;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.25), transparent 60%),
+              radial-gradient(circle at 80% 100%, rgba(236, 72, 153, 0.25), transparent 60%),
+              #020617;
+  border: 1px solid rgba(30, 64, 175, 0.9);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.user-tabs > label {
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #020617;
+  background: #f9fafb;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.user-tabs > label:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.9);
+  opacity: 0.95;
+}
+
+.user-tab-add {
+  background: transparent !important;
+  color: #e5e7eb !important;
+  border: 1px dashed rgba(148, 163, 184, 0.85) !important;
+}
+
+/* === COUNTRY FORM === */
+.country-form {
+  flex: 0 0 320px;
+  max-width: 420px;
+  padding: 1.3rem 1.6rem;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.25), transparent 60%),
+    rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(129, 140, 248, 0.8);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+}
+
+.country-label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #e5e7eb;
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+}
+
+.country-input-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.country-form input[type="text"] {
+  flex: 1;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  background: rgba(15, 23, 42, 0.95);
+  color: #f9fafb;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.country-form input[type="text"]::placeholder {
+  color: #9ca3af;
+}
+
+.country-form button {
+  border-radius: 999px;
+  padding-inline: 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  color: #020617;
+  background: linear-gradient(120deg, #22c55e, #38bdf8);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.country-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 45px rgba(56, 189, 248, 0.85);
+}
+
+.country-helper {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  color: #e5e7eb;
+  opacity: 0.9;
+}
+
+.country-helper span {
+  color: #fbbf24;
+}
+
+/* === MAP CARD (KOYU AMA OKUNUR) === */
+.ag-canvas {
+  width: 100%;
+  padding: 1.5rem 1.2rem 0.8rem;
+  margin-top: 0.7rem;
+  border-radius: 1.8rem;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.18), transparent 55%),
+    #020617;
+  border: 1px solid rgba(59, 130, 246, 0.9);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.95);
+}
+
+.ag-canvas_svg {
+  max-height: 540px;
+}
+
+/* haritanın kendisi koyu lacivert, çizgiler biraz açık */
+.ag-canvas_svg path {
+  fill: #020617;
+  stroke: #0b1120;
+  stroke-width: 0.5;
+  transition: fill 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+}
+
+/* hover */
+.ag-canvas_svg path:hover {
+  fill: #0f172a;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+  transform: translateY(-1px);
+}
+
+/* ziyaret edilen ülkeler – parlak cyan/yeşil */
+.ag-canvas_svg path.visited {
+  fill: #22c55e;
+  filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.95));
+}
+
+.total-count {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  opacity: 0.9;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .tracker-body {
+    padding: 2rem 1.2rem 2.5rem;
+  }
+
+  .tracker-controls {
+    flex-direction: column;
+  }
+
+  .user-tabs {
+    border-radius: 1.3rem;
+  }
+
+  .country-form {
+    max-width: 100%;
+  }
+
+  .ag-canvas_svg {
+    max-height: 420px;
+  }
+}
+
+
+
+/* === REFINED CONTROLS: USER PILLS + COUNTRY CARD === */
+
+/* solda profiller, sağda ülke formu – grid */
+.tracker-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .tracker-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* PROFİL PİLL KUTUSU */
+.user-tabs {
+  padding: 1rem 1.2rem;
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.25), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.25), transparent 60%),
+    rgba(15, 23, 42, 0.98);
+  border: 1px solid rgba(30, 64, 175, 0.9);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+/* butonların genel hali */
+.user-tabs button {
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.9);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+/* soldaki küçük numara badge'i */
+.user-pill-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #0f172a;
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.9);
+}
+
+.user-tabs button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.9);
+  opacity: 0.98;
+}
+
+/* aktif profil – gradient ve daha parlak */
+.user-pill--active {
+  background: linear-gradient(120deg, #22c55e, #38bdf8);
+  color: #020617;
+}
+
+.user-pill--active .user-pill-index {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+}
+
+/* + Add profile butonu */
+.user-pill-add {
+  background: transparent;
+  border: 1px dashed rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+  box-shadow: none;
+}
+
+.user-pill-plus {
+  font-size: 0.9rem;
+}
+
+/* Ülke kartının glow'u biraz daha “pro” dursun */
+.country-form {
+  position: relative;
+  overflow: hidden;
+}
+
+.country-form::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.35), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.35), transparent 60%);
+  opacity: 0.7;
+  filter: blur(40px);
+  z-index: -1;
+}
